@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+ 
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <script>
+      
+      //Define a Module
+      var myApp = angular.module('myApp', []);
+      
+      //Register Services to myApp Module.
+      myApp.factory('MenuService', function(){
+        
+        var menu = [
+          "Hamburger",
+          "Curry",
+          "Stew",
+          "Stake"
+        ]
+        
+        return{
+          
+          getMenu : function(){
+            return menu;
+          },
+          
+          addMenu : function(yourMenu){
+            menu.push(yourMenu);
+          },
+ 
+          removeMenu : function(){
+            menu.splice(0,1);
+          }
+ 
+        }
+      });
+      
+      myApp.controller('ManageCtrl', function($scope, MenuService){
+ 
+          $scope.menuName = "";
+ 
+          $scope.addMenu = function(){
+            if($scope.menuName !== ""){
+              MenuService.addMenu($scope.menuName);
+            }
+          }
+ 
+          $scope.removeMenu = function(){
+            MenuService.removeMenu();
+          }
+ 
+      });
+ 
+      myApp.controller('ListCtrl', function($scope, MenuService){
+ 
+        $scope.myMenu = MenuService.getMenu();
+ 
+      });      
+ 
+    </script>
+  </head>
+ 
+  <body>
+    <h1>Share Data and Methods between Controllers with Service.</h1>
+    <div ng-controller="ManageCtrl" style="background:#FFFFCC;">
+        <h2>[secondCtrl Controller]</h2>
+      <h3>Add Menu</h3>
+      <input type="text" ng-model="menuName">
+    <button ng-click="addMenu()">AddMenu</button>
+      <h3>removeMenu</h3>
+    <button ng-click="removeMenu()">removeMenu</button><br/><br/>
+    </div>
+ 
+    <div ng-controller="ListCtrl"style="background:#CCFF66;">
+      <h2>[indexCtrl Controller]</h2>
+      <h3>Menu</h3>
+    <ul>
+      <li ng-repeat='items in myMenu track by $index'>{{items}}</li>
+    </ul>
+    </div>
+ 
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script data-require="angular.js@*" data-semver="1.2.12" src="http://code.angularjs.org/1.2.12/angular.js"></script>
+<script>
+// app.jsに移してもよいかも。
+var myApp = angular.module('myApp',[]);
+myApp.controller('jQueryCtrl', function($scope){
+    $(function(){
+      
+      $('#jquery').html('Manipulated by jQuery');
+      $scope.attacheAnimation = function(){
+        $('#jquery').addClass('right')
+      }
+      
+    });
+});
+
+myApp.controller('jQLiteCtrl', function($scope){
+    $(function(){
+      
+      angular.element('#jqlite').html('Manipulated by angular.element()'); 
+      $scope.attacheAnimation = function(){
+        angular.element('#jqlite').addClass('left')
+      }
+      
+    });
+});      
+
+</script>
+<style type="text/css">
+<!--
+.right{
+    -webkit-transition-duration: 850ms;
+    -moz-transition-duration: 850ms;
+    -o-transition-duration: 850ms;
+    transition-duration: 850ms;
+    -webkit-animation-timing-function:cubic-bezier(0.9, 0.04, 0.98, 0.335);
+    animation-timing-function:   cubic-bezier(0.9, 0.04, 0.98, 0.335);
+ 
+      -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);    
+}
+.left{
+    -webkit-transition-duration: 850ms;
+    -moz-transition-duration: 850ms;
+    -o-transition-duration: 850ms;
+    transition-duration:850ms;
+    -webkit-animation-timing-function:cubic-bezier(0.9, 0.04, 0.98, 0.335);
+    animation-timing-function:   cubic-bezier(0.9, 0.04, 0.98, 0.335);
+ 
+      -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);     
+}
+-->
+</style>
+</head>
+<body>
+    <div ng-controller="jQueryCtrl">
+      <h2 id="jquery"></h2>
+      <button ng-click="attacheAnimation()">Right!</button>
+    </div>
+    <div ng-controller="jQLiteCtrl">
+      <h2 id="jqlite"></h2>
+      <button ng-click="attacheAnimation()">Left!</button>      
+    </div>
+</body>
+</html>

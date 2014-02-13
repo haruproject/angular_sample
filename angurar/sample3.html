@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script>
+// app.jsに移してもよいかも。
+var myApp = angular.module('myApp',[]);
+myApp.controller('clickCtrl', function($scope) {
+	$scope.dynamic = "red";
+	$scope.changeToRed = function() {
+		$scope.dynamic = "red";
+	}
+	
+	$scope.changeToGreen = function() {
+		$scope.dynamic = "green";
+	}
+	
+	$scope.changeToBlue = function() {
+		$scope.dynamic = "blue";
+	}
+});
+
+</script>
+<style type="text/css">
+<!--
+.red{
+  color:#FF0000;
+}
+.green{
+  color:#00FF00;
+}
+.blue{
+  color:#0000FF;
+}
+button{
+  display:inline-block;
+}
+-->
+</style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="clickCtrl">
+	<span ng-class="dynamic">Onsen Ui</span><br />
+	<button ng-click="changeToRed()">red</button>
+	<button ng-click="changeToGreen()">green</button>
+	<button ng-click="changeToBlue()">blue</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular.min.js"></script>
+</head>
+
+<body ng-app="Onsen">
+	<div ng-controller="MorningCtrl">
+		<h2>{{greeting}}</h2>
+	</div>
+	<div ng-controller="DayCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+    
+    <div ng-controller="NightCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+</body>
+</html>
+
+<script>
+// 任意の名前でモジュール名を定義
+var Onsen = angular.module('Onsen',[]);
+Onsen.controller('MorningCtrl', function($scope){
+    $scope.greeting = "Good Morning!";
+});
+
+Onsen.controller('DayCtrl', function($scope){
+    $scope.greeting = "Good Day!";
+  });      
+
+  Onsen.controller('NightCtrl', function($scope){
+    $scope.greeting = "Good Night!";
+  });
+</script>
